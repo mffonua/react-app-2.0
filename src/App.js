@@ -1,3 +1,4 @@
+import NavBar from "./scenes/Navbar";
 import {useState} from "react";
 import useMediaQuery from "./hooks/useMediaQuery";
 
