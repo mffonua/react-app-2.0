@@ -1,16 +1,43 @@
 import NavBar from "./scenes/Navbar";
-import {useState} from "react";
+import DotGroup from "./scenes/DotGroup";
+import { useEffect, useState } from "react";
 import useMediaQuery from "./hooks/useMediaQuery";
 
 function App() {
-const [selectedPage, setSelectedPage] = useState('home'); /*Detemine what part of nav. we are at  */
-const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)"); /*Determine if min width is > or < 1060 */
-return <div className="app bg-deep-blue">
-  <NavBar
-    selectedPage={selectedPage}
-    setSelectedPage={setSelectedPage}
-  />
-</div>;
+  const [selectedPage, setSelectedPage] =
+    useState("home"); /*Detemine what part of nav. we are at  */
+  const [isTopOfPage, setIsTopOfPage] = useState(true); /* Determine  */
+  const isAboveMediumScreens = useMediaQuery(
+    "(min-width: 1060px)"
+  ); /*Determine if min width is > or < 1060 */
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) setIsTopOfPage(true);
+      if (window.scrollY !== 0) setIsTopOfPage(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <div className="app bg-deep-blue">
+      <NavBar
+        isTopOfPage={isTopOfPage}
+        selectedPage={selectedPage}
+        setSelectedPage={setSelectedPage}
+      />
+      <div className="w-5/6 mx-auto md: h-full">
+        {/** Nav Scrolling Dots*/}
+        {isAboveMediumScreens && (
+          <DotGroup
+            selectedPage={selectedPage}
+            setSelectedPage={setSelectedPage}
+          />
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default App;
