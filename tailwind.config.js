@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-/** Setting theme configuration */
 module.exports = {
   content: ["./src/**/*.{html,js,jsx}"],
   mode: "jit",
