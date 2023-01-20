@@ -2,6 +2,7 @@ import NavBar from "./scenes/Navbar";
 import DotGroup from "./scenes/DotGroup";
 import Landing from "./scenes/Landing";
 import { useEffect, useState } from "react";
+import linearGradient from "./components/LineGradient"
 import useMediaQuery from "./hooks/useMediaQuery";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
         )}
         <Landing setSelectedPage={setSelectedPage} />
       </div>
+      <linearGradient></linearGradient>
     </div>
   );
 }
